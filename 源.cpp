@@ -12,10 +12,10 @@ public:
 	std::shared_ptr<Node<T>> next;
 };
 
-template<typename T>class Example {
+template<typename T>class MyStack {
 public:
-	Example();
-	~Example() = default;
+	MyStack();
+	~MyStack() = default;
 	void push(T t);
 	T top();
 	bool isEmpty();
@@ -26,20 +26,20 @@ private:
 	std::shared_ptr<Node<T>> first;
 };
 
-template<typename T>Example<T>::Example() :count(0) {
+template<typename T>MyStack<T>::MyStack() :count(0) {
 	first = std::make_shared<Node<T>>();
 	first->next = nullptr;
 	//std::cout << first.use_count() << std::endl;
 };
 
-template<typename T>void Example<T>::push(T t) {
+template<typename T>void MyStack<T>::push(T t) {
 	std::shared_ptr<Node<T>> node = std::make_shared<Node<T>>(t);//根据第一个构造函数，因为接下来的每一个node的item都有内容
 	node->next = first->next;
 	first->next = node;
 	++count;
 }
 
-template<typename T>T Example<T>::pop() {
+template<typename T>T MyStack<T>::pop() {
 	if (first->next != nullptr) {
 		std::shared_ptr<Node<T>> delnode = first->next;
 		first->next = first->next->next;
@@ -54,7 +54,7 @@ template<typename T>T Example<T>::pop() {
 	}
 }
 
-template<typename T>T Example<T>::top() {
+template<typename T>T MyStack<T>::top() {
 
 	if (first->next != nullptr) {
 		return first->next->item;
@@ -65,13 +65,13 @@ template<typename T>T Example<T>::top() {
 	}
 }
 
-template<typename T>std::size_t Example<T>::size() { return count; }
+template<typename T>std::size_t MyStack<T>::size() { return count; }
 
 
-template<typename T>bool Example<T>::isEmpty() { return count == 0; }
+template<typename T>bool MyStack<T>::isEmpty() { return count == 0; }
 
 int main() {
-	Example<int> e1;
+	MyStack<int> e1;
 	e1.push(1);
 	std::cout << e1.top() << std::endl;
 	e1.push(2);
@@ -85,7 +85,7 @@ int main() {
 	e1.push(6);
 	std::cout << e1.top() << std::endl;
 	std::cout << "栈大小为：" << e1.size() << std::endl;
-
+	std::cout << "----------------------" << std::endl;
 	while (!e1.isEmpty()) {
 		std::cout << "出栈元素为：" << e1.pop() << std::endl;
 	}
