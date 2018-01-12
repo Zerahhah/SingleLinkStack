@@ -29,7 +29,6 @@ private:
 template<typename T>MyStack<T>::MyStack() :count(0) {
 	first = std::make_shared<Node<T>>();
 	first->next = nullptr;
-	//std::cout << first.use_count() << std::endl;
 };
 
 template<typename T>void MyStack<T>::push(T t) {
